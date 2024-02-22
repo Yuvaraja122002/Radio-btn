@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uid" version="3.0" prefix="ibooks: http://vocabulary.itunes.apple.com/rdf/ibooks/vocabulary-extensions-1.0/">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+<dc:title id="en_title" xml:lang="en-us">Meeting Respiratory Needs</dc:title>
+<meta refines="#en_title" property="title-type">main</meta>
+<meta refines="#en_title" property="display-seq">1</meta>
+<dc:creator id="creator1">author</dc:creator>
+<meta refines="#creator1" property="role" scheme="marc:relators">aut</meta>
+<dc:identifier id="uid">9789043041713</dc:identifier>
+<meta refines="#uid" property="identifier-type" scheme="xsd:string">isbn</meta>
+<dc:source id="src-id">urn:isbn:9789043041713</dc:source>
+<meta refines="#src-id" property="identifier-type" scheme="onix:codelist5">15</meta>
+<meta property="dcterms:modified">2020-02-27T20:30:00Z</meta>
+<dc:date>2020-02-27T20:30:00Z</dc:date>
+<dc:language id="en_language">nl</dc:language>
+<dc:publisher id="en_publisher" xml:lang="fr">nl</dc:publisher>
+<meta name="cover" content="cover-image"/>
+</metadata>
+<manifest>
+<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+<item id="css1" href="css/stylesheet.css" media-type="text/css"/>
+
+<item id="nav" properties="nav" href="nav.xhtml" media-type="application/xhtml+xml" />
+
+<item id="Chapter1" href="xhtml/Chapter1.xhtml" media-type="application/xhtml+xml" properties="scripted" />
+
+
+<item href="xhtml/js/jquery-3.2.1.js" id="js1" media-type="text/javascript"/>
+<item href="xhtml/js/format_lg_obj.js" id="js2" media-type="text/javascript"/>
+<item href="xhtml/js/imagespopscript.js" id="js3" media-type="text/javascript"/>
+<item href="xhtml/js/jquery-1.7.2.min.js" id="js4" media-type="text/javascript"/>
+<item href="xhtml/js/libs/jquery_ui.js" id="js5" media-type="text/javascript"/>
+<item href="xhtml/js/libs/jquery_ui_touch_punch.js" id="js6" media-type="text/javascript"/>
+<item href="xhtml/js/jquery-ui-1.8.22.custom.min.js" id="js7" media-type="text/javascript"/>
+<item href="xhtml/js/jquery-ui.min.js" id="js8" media-type="text/javascript"/>
+<item href="xhtml/js/main.js" id="js9" media-type="text/javascript"/>
+<item href="xhtml/js/mouseover.js" id="js10" media-type="text/javascript"/>
+<item href="xhtml/js/A_jquery.min.js" id="js11" media-type="text/javascript"/>
+<item href="xhtml/js/C_custom.js" id="js12" media-type="text/javascript"/>
+
+
+
+<item id="img001" href="images/bull.jpg" media-type="image/jpeg"/>
+<item id="img002" href="images/fig7_1a.jpg" media-type="image/jpeg"/>
+<item id="img003" href="images/fig7_1b.jpg" media-type="image/jpeg"/>
+<item id="img158" href="images/tick-black.png" media-type="image/png"/>
+
+<item id="image189a" href="images/dummy.jpg" media-type="image/jpeg"/>
+
+<item id="image190" href="images/tick.png" media-type="image/png"/>
+<item id="image191" href="images/wrong.png" media-type="image/png"/>
+
+</manifest>
+
+<spine toc="ncx">
+<itemref idref="Chapter1" linear="yes"/>
+
+
+</spine>
+<guide>
+<reference type="toc" title="Contents" href="xhtml/Chapter1.xhtml"/>
+</guide>
+</package>
