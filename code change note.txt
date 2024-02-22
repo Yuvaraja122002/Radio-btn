@@ -1,0 +1,96 @@
+1. HTML Changes:
+Replace the <input> tags inside the <label> elements with <span> tags and assign the radio-btn class to them.
+	
+<label><span tabindex="0" class="radio-btn" data-value="a"></span> leave the set wrapped until it dries, then open it</label>
+<label><span tabindex="1" class="radio-btn" data-value="b"></span> open the set on a separate trolley and transfer the instruments from there</label>
+<label><span tabindex="2" class="radio-btn" data-value="c"></span> unwrap the tray to prevent its use and send the entire contents for re-sterilization</label>
+<label><span tabindex="3" class="radio-btn" data-value="d"></span> unwrap the set, allow the scrub nurse to remove the instruments and send the tray back for re-sterilization</label>
+
+2. CSS For Radio button:
+Style the <span> elements to appear and behave like radio buttons. We define styles for both unselected and selected options.
+
+.radio-btn {
+    display: inline-block;
+    width: 20px; /* Adjust width as needed */
+    height: 20px; /* Adjust height as needed */
+    border: 1px solid #ccc;
+    border-radius: 50%; /* Ensures the span looks like a circle */
+    cursor: pointer;
+    margin-right: 10px; /* Adjust spacing between radio buttons */
+}
+
+.radio-btn.checked {
+    background-color: #007bff; /* Change background color when selected */
+}
+
+3. JavaScript Changes:
+Add an event listener to each <span> element with the class radio-btn. This listener triggers when the span is clicked and handles the selection logic.
+
+document.addEventListener('DOMContentLoaded', function () {
+    var radioButtons = document.querySelectorAll('.radio-btn');
+    radioButtons.forEach(function (radioBtn) {
+        radioBtn.addEventListener('click', function () {
+            // Clear selection from other options
+            clearInput();
+            // Set the current option as selected
+            this.classList.add('checked');
+        });
+    });
+});
+
+Modify the validate_ans() function to correctly identify the selected option using the checked class.
+
+function validate_ans(quizid, crctAns) {
+    var id = quizid.split('_')[1];
+    $validateText = document.querySelector('#correct' + id + ' #validate' + id);
+    $feedbackText = document.querySelectorAll('#feedback' + id + ' .feedback-text');
+    $colorText = document.querySelectorAll('#color' + id + ' .color-text');
+    $imageText = document.querySelectorAll('#color' + id + ' .images-icon');
+    resetBtn = document.getElementById('reset_' + id);
+    checkBtn = document.getElementById('check_' + id);
+    selected_spans = document.querySelectorAll('#color' + id + ' .color-text .radio-btn.checked');
+
+    resetBtn.removeAttribute('disabled');
+    correctBox = document.getElementById('correct' + id);
+    correctBox.style.display = 'block';
+
+    var selectedValue = '';
+    if (selected_spans.length > 0) {
+        selectedValue = selected_spans[0].getAttribute('data-value');
+    }
+
+    checkBtn.setAttribute('disabled', 'true');
+
+    if (selectedValue === '') {
+        $validateText.innerHTML = 'You did not answer this!';
+        return;
+    }
+
+    checkBtn.style.background = '#fbfafa';
+
+    index = selectedValue.charCodeAt(0) % 97;
+
+    $feedbackText[index].style.display = 'block';
+
+    if (selectedValue === crctAns) {
+        $validateText.innerHTML = '';
+        $validateText.style.color = '#00000';
+        $feedbackText[index].style.color = '#00000';
+        $colorText[index].style.background = '#47b347';
+        $imageText[index].style.display = 'block';
+        $imageText[index].src = "../images/tick.png";
+        $("#att" + id).css("display", "block")
+        $("#att" + id).attr('src', '../images/tick.png');
+    } else {
+        $validateText.innerHTML = '';
+        $validateText.style.color = '#00000';
+        $feedbackText[index].style.color = '#00000';
+        $colorText[index].style.background = '#ef5b5b';
+        $imageText[index].style.display = 'block';
+        $imageText[index].src = "../images/wrong.png";
+    }
+}
+
+Ensure that the data-value attributes of the <span> elements are set correctly to identify the value of each option. Also, check that the tabindex attribute is set to allow keyboard navigation.
+
+By making these changes, the <span> elements will behave like radio buttons, and users can select options by clicking on them.

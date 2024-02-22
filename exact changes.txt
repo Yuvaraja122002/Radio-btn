@@ -1,0 +1,35 @@
+selected_spans = document.querySelectorAll("#color" + id + " .color-text .radio-btn");
+
+var selectedValue = "";
+  for (var i = 0; i < selected_spans.length; i++) {
+    if (selected_spans[i].classList.contains("checked")) {
+      selectedValue = selected_spans[i].getAttribute("data-value");
+      break;
+    }
+  }
+
+if (selectedValue === "") {
+    $validateText.innerHTML = "You did not answer this!";
+    return;
+  }
+
+
+selected_spans = document.querySelectorAll("#color" + id + " .color-text .radio-btn");
+
+for (var i = 0; i < selected_spans.length; i++) {
+    selected_spans[i].classList.remove("checked");
+}
+
+
+
+----radio btn js---------
+document.addEventListener("DOMContentLoaded", function () {
+  var radioButtons = document.querySelectorAll(".radio-btn");
+  radioButtons.forEach(function (radioBtn) {
+    radioBtn.addEventListener("click", function () {
+      clearInput();
+      this.classList.add("checked");
+    });
+  });
+});
+----radio btn js---------
