@@ -34,6 +34,29 @@
             background-color: #007bff;
             /* Change background color when selected */
         }
+
+        /* CSS for tick and wrong images */
+        .tick-wrong-image {
+            display: block;
+            /* Make sure the images are displayed */
+            width: 20px;
+            /* Adjust the width of the images as needed */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin-right: 5px;
+            /* Adjust margin as needed */
+        }
+
+        /* Additional CSS for styling the tick and wrong images */
+        .tick-image {
+            display: none;
+            /* Initially hide tick image */
+        }
+
+        .wrong-image {
+            display: none;
+            /* Initially hide wrong image */
+        }
     </style>
 </head>
 
@@ -203,8 +226,7 @@
                             </div>
                         </div>
                     </form>
-                    <img src="../images/tick.png" alt="Tick" />
-                    <img src="../images/wrong.png" alt="Wrong" />
+
                     <div id="correct7"
                         style="font-family:Times;height:80%;color:black;background-color:#E4E4E4;margin:0.5em 0em 0.3em 0.3em;font-size:1em;padding:10px;display:none;">
                         <p class="incorrect-text" id="validate7"></p>
@@ -232,6 +254,13 @@
                         style="border:1px solid #4f6f9c;font-family: Times;color:black;background-color:#E4E4E4;font-size:1em;padding:5px;"
                         onclick="refresh(this.id,event)">Reset</button>
                 </p>
+            </div>
+            <!-- Add tick and wrong images here -->
+            <div class="tick-image" style="display: none;">
+                <img src="../images/tick.png" alt="Tick" class="tick-wrong-image" />
+            </div>
+            <div class="wrong-image" style="display: none;">
+                <img src="../images/wrong.png" alt="Wrong" class="tick-wrong-image" />
             </div>
         </div>
 
