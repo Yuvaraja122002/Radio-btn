@@ -12,26 +12,27 @@ var index = 0;
 var length = $feedbackText.length;
 var length = $colorText.length;
 
-function showStuff(id) {
-  var getId = id.split("_")[1];
-  reveal = document.getElementById("answer_" + getId);
-  textreveal = document.getElementById("test_" + getId);
-  resetreveal = document.getElementById("reset_" + getId);
-  textreveal.style.display = "none";
-  reveal.style.display = "block";
-  resetreveal.style.display = "block";
+// Function to show tick image
+function showTickImage(id) {
+  var tickImage = document.querySelector("#quiz_" + id + " .tick-image");
+  tickImage.style.display = "block";
 }
 
-function referesh(id) {
-  var getId = id.split("_")[1];
-  reveal = document.getElementById("answer_" + getId);
-  textreveal = document.getElementById("test_" + getId);
-  resetreveal = document.getElementById("reset_" + getId);
-  textreveal.style.display = "block";
-  reveal.style.display = "none";
-  resetreveal.style.display = "none";
+// Function to show wrong image
+function showWrongImage(id) {
+  var wrongImage = document.querySelector("#quiz_" + id + " .wrong-image");
+  wrongImage.style.display = "block";
 }
 
+// Function to hide tick and wrong images
+function hideTickAndWrongImages(id) {
+  var tickImage = document.querySelector("#quiz_" + id + " .tick-image");
+  var wrongImage = document.querySelector("#quiz_" + id + " .wrong-image");
+  tickImage.style.display = "none";
+  wrongImage.style.display = "none";
+}
+
+// Function to handle the validation of answers
 function validate_ans(quizid, crctAns) {
   var id = quizid.split("_")[1];
   $validateText = document.querySelector("#correct" + id + " #validate" + id);
@@ -76,20 +77,19 @@ function validate_ans(quizid, crctAns) {
     $validateText.style.color = "#00000";
     $feedbackText[index].style.color = "#00000";
     $colorText[index].style.background = "#47b347";
-    $imageText[index].style.display = "block";
-    $imageText[index].src = "../images/bull.jpg";
+    showTickImage(id); // Call function to show tick image
     $("#att" + id).css("display", "block");
-    $("#att" + id).attr("src", "../images/bull.jpg");
+    $("#att" + id).attr("src", "../images/tick.png");
   } else {
     $validateText.innerHTML = "";
     $validateText.style.color = "#00000";
     $feedbackText[index].style.color = "#00000";
     $colorText[index].style.background = "#ef5b5b";
-    $imageText[index].style.display = "block";
-    $imageText[index].src = "../images/wrong.png";
+    showWrongImage(id); // Call function to show wrong image
   }
 }
 
+// Function to reset the quiz
 function refresh(quizid) {
   var id = quizid.split("_")[1];
   $validateText = document.querySelector("#correct" + id + " #validate" + id);
@@ -124,8 +124,10 @@ function refresh(quizid) {
   correctBox.style.display = "none";
   $("#attempt_" + id).html("");
   $("#att" + id).css("display", "none");
+  hideTickAndWrongImages(id); // Call function to hide tick and wrong images
 }
 
+// Function to clear selected input
 function clearInput() {
   var inputs = document.querySelectorAll(".radio-btn");
   for (var i = 0, len = inputs.length; i < len; i++) {
@@ -135,12 +137,24 @@ function clearInput() {
   }
 }
 
+// Event listener for radio button clicks
 document.addEventListener("DOMContentLoaded", function () {
   var radioButtons = document.querySelectorAll(".radio-btn");
   radioButtons.forEach(function (radioBtn) {
     radioBtn.addEventListener("click", function () {
       clearInput();
       this.classList.add("checked");
+    });
+  });
+});
+
+// Function to reset the quiz on button click
+document.addEventListener("DOMContentLoaded", function () {
+  var resetButtons = document.querySelectorAll(".reset");
+  resetButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var quizid = this.id;
+      refresh(quizid);
     });
   });
 });
