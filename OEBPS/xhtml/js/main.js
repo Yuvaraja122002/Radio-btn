@@ -77,9 +77,9 @@ function validate_ans(quizid, crctAns) {
     $feedbackText[index].style.color = "#00000";
     $colorText[index].style.background = "#47b347";
     $imageText[index].style.display = "block";
-    $imageText[index].src = "../images/tick.png";
+    $imageText[index].src = "../images/bull.jpg";
     $("#att" + id).css("display", "block");
-    $("#att" + id).attr("src", "../images/tick.png");
+    $("#att" + id).attr("src", "../images/bull.jpg");
   } else {
     $validateText.innerHTML = "";
     $validateText.style.color = "#00000";
