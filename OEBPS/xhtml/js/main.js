@@ -12,24 +12,28 @@ var index = 0;
 var length = $feedbackText.length;
 var length = $colorText.length;
 
-// Function to show tick image
-function showTickImage(id) {
-  var tickImage = document.querySelector("#quiz_" + id + " .tick-image");
-  tickImage.style.display = "block";
+// Function to show tick image next to selected option
+function showTickImageNextToOption(option) {
+  var tickImage = document.createElement("img");
+  tickImage.src = "../images/tick.png"; // Adjust the path as per your file structure
+  tickImage.className = "tick-wrong-image";
+  option.parentNode.insertBefore(tickImage, option.nextSibling);
 }
 
-// Function to show wrong image
-function showWrongImage(id) {
-  var wrongImage = document.querySelector("#quiz_" + id + " .wrong-image");
-  wrongImage.style.display = "block";
+// Function to show wrong image next to selected option
+function showWrongImageNextToOption(option) {
+  var wrongImage = document.createElement("img");
+  wrongImage.src = "../images/wrong.png"; // Adjust the path as per your file structure
+  wrongImage.className = "tick-wrong-image";
+  option.parentNode.insertBefore(wrongImage, option.nextSibling);
 }
 
-// Function to hide tick and wrong images
-function hideTickAndWrongImages(id) {
-  var tickImage = document.querySelector("#quiz_" + id + " .tick-image");
-  var wrongImage = document.querySelector("#quiz_" + id + " .wrong-image");
-  tickImage.style.display = "none";
-  wrongImage.style.display = "none";
+// Function to hide tick and wrong images next to selected option
+function hideTickAndWrongImagesNextToOption(option) {
+  var images = option.parentNode.querySelectorAll(".tick-wrong-image");
+  images.forEach(function (image) {
+    image.remove();
+  });
 }
 
 // Function to handle the validation of answers
@@ -40,7 +44,6 @@ function validate_ans(quizid, crctAns) {
     "#feedback" + id + " .feedback-text"
   );
   $colorText = document.querySelectorAll("#color" + id + " .color-text");
-  $imageText = document.querySelectorAll("#color" + id + " .images-icon");
   resetBtn = document.getElementById("reset_" + id);
   checkBtn = document.getElementById("check_" + id);
   selected_spans = document.querySelectorAll(
@@ -51,9 +54,11 @@ function validate_ans(quizid, crctAns) {
   correctBox = document.getElementById("correct" + id);
   correctBox.style.display = "block";
 
+  var selectedOption = "";
   var selectedValue = "";
   for (var i = 0; i < selected_spans.length; i++) {
     if (selected_spans[i].classList.contains("checked")) {
+      selectedOption = selected_spans[i];
       selectedValue = selected_spans[i].getAttribute("data-value");
       break;
     }
@@ -77,7 +82,7 @@ function validate_ans(quizid, crctAns) {
     $validateText.style.color = "#00000";
     $feedbackText[index].style.color = "#00000";
     $colorText[index].style.background = "#47b347";
-    showTickImage(id); // Call function to show tick image
+    showTickImageNextToOption(selectedOption); // Show tick image next to selected option
     $("#att" + id).css("display", "block");
     $("#att" + id).attr("src", "../images/tick.png");
   } else {
@@ -85,7 +90,7 @@ function validate_ans(quizid, crctAns) {
     $validateText.style.color = "#00000";
     $feedbackText[index].style.color = "#00000";
     $colorText[index].style.background = "#ef5b5b";
-    showWrongImage(id); // Call function to show wrong image
+    showWrongImageNextToOption(selectedOption); // Show wrong image next to selected option
   }
 }
 
@@ -124,7 +129,14 @@ function refresh(quizid) {
   correctBox.style.display = "none";
   $("#attempt_" + id).html("");
   $("#att" + id).css("display", "none");
-  hideTickAndWrongImages(id); // Call function to hide tick and wrong images
+
+  // Remove tick and wrong images
+  var tickImages = document.querySelectorAll(
+    "#quiz_" + id + " .tick-wrong-image"
+  );
+  tickImages.forEach(function (image) {
+    image.parentNode.removeChild(image);
+  });
 }
 
 // Function to clear selected input
