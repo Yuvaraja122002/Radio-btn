@@ -20,42 +20,39 @@
         .radio-btn {
             display: inline-block;
             width: 10px;
-            /* Adjust width as needed */
             height: 10px;
-            /* Adjust height as needed */
             border: 2px solid #ccc;
             border-radius: 50%;
-            /* Ensures the span looks like a circle */
             margin-right: 5px;
-            /* Adjust spacing between radio buttons */
         }
 
         .radio-btn.checked {
             background-color: #007bff;
-            /* Change background color when selected */
         }
 
-        /* CSS for tick and wrong images */
         .tick-wrong-image {
             display: block;
-            /* Make sure the images are displayed */
             width: 20px;
-            /* Adjust the width of the images as needed */
             height: auto;
-            /* Maintain aspect ratio */
             margin-right: 5px;
-            /* Adjust margin as needed */
         }
 
-        /* Additional CSS for styling the tick and wrong images */
         .tick-image {
             display: none;
-            /* Initially hide tick image */
         }
 
         .wrong-image {
             display: none;
-            /* Initially hide wrong image */
+        }
+
+        .tick-image,
+        .wrong-image {
+            position: relative;
+            top: 3px;
+            margin-right: 5px;
+            margin-left: -10px;
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -195,7 +192,8 @@
                                 <img aria-hidden="true" style="display:none;position:absolute;"
                                     src="../images/dummy.jpg" class="images-icon" />
                                 <div tabindex="0" class="content_hang">
-                                    <label><span tabindex="0" class="radio-btn" data-value="a"></span> leave the set
+
+                                    <label><span tabindex="0" class="radio-btn" data-value="a"></span>leave the set
                                         wrapped until it dries, then open it</label>
                                 </div>
                             </div>
@@ -254,13 +252,6 @@
                         style="border:1px solid #4f6f9c;font-family: Times;color:black;background-color:#E4E4E4;font-size:1em;padding:5px;"
                         onclick="refresh(this.id,event)">Reset</button>
                 </p>
-            </div>
-            <!-- Add tick and wrong images here -->
-            <div class="tick-image" style="display: none;">
-                <img src="../images/tick.png" alt="Tick" class="tick-wrong-image" />
-            </div>
-            <div class="wrong-image" style="display: none;">
-                <img src="../images/wrong.png" alt="Wrong" class="tick-wrong-image" />
             </div>
         </div>
 
